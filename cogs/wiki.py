@@ -16,8 +16,6 @@ class Wikipedia(commands.Cog):
         print('Wiki cog loaded.')
         
         
-    
-
     @app_commands.command(name="wiki", description="Search in wikipedia")
     # async def Phrase(self, interaction: discord.Interaction, today: bool):   
     async def wikipedia(self, interaction: discord.Interaction, query: str, section:str=None):
@@ -25,38 +23,39 @@ class Wikipedia(commands.Cog):
         url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Wikipedia-logo-v2-es.svg/1200px-Wikipedia-logo-v2-es.svg.png'
         pageQuery = site.page(query)
         pageSummary  = pageQuery.summary[0:300].split('.')[0]
-        
-        
         embed = discord.Embed(title=pageQuery.title, description=f'Results for: {query}')
         embed.set_thumbnail(url=f'{url}')
         
-        # embed = discord.Embed(title=f'ID: {pokeId}', description=f'{pokesearched.name.capitalize()}', colour=colors[f'{pokeTypes[0]}'])
-        # embed.set_thumbnail(url=f"{pokeUrl}")
-        # embed.add_field(name="Types", value=f'{filteredPoketypes}', inline=False)
-        # embed.add_field(name="Height", value=f' {pokeHeight}', inline=False)
-        # embed.add_field(name="Weight", value=f' {pokeWeight}', inline=False)
-
         if pageQuery.exists():
-            message = f'Results for {query}: {pageSummary} {pageQuery.fullurl}'
-            embed.add_field(name='Summary', value=f'{pageSummary}', inline=False)
-               
-            if section is not None:
-                pageSections = pageQuery.section_by_title(section.capitalize())
-                if pageSections is not None:
-                    pageText = pageSections.text[0:300].split('.')[0]
-                    print(pageText)
-                    embed.remove_field(index=1)
-                    embed.add_field(name=f'{pageSections.title}', value=f'{pageText}')
-                
+            embed.add_field(name='Summary', value=pageSummary, inline=False)
+
+            if section is None:
+                sections = pageQuery.sections
+                for s in sections:
+                    section_title = s.title
+                    section_text = s.text[0:100].split('.')[0]
+                    embed.add_field(name=section_title, value=section_text, inline=False)
+
+            else:
+                section_title = section.capitalize()
+                page_section = pageQuery.section_by_title(section_title)
+
+                if page_section:
+                    section_text = page_section.text[0:300].split('.')[0]
+                    embed.add_field(name=page_section.title, value=section_text)
                 else:
-                    
-                    await interaction.response.send_message(content=f"This section doesn't exist on {query.capitalize()}'s page")
-            embed.add_field(name='Read more', value=f'[here]({pageQuery.fullurl})', inline=False)    
+                    message = f"This section doesn't exist on {query.capitalize()}'s page"
+                    await interaction.response.send_message(content=message)
+
+            read_more = f"[here]({pageQuery.fullurl})"
+            embed.add_field(name='Read more', value=read_more, inline=False)
+
             await interaction.response.send_message(embed=embed)
-                
+
         else:
-            await interaction.response.send_message(content='⚡ Page not found. Please make sure you have the correct name!', ephemeral=True)
-            
+            message = '⚡ Page not found. Please make sure you have the correct name!'
+            await interaction.response.send_message(content=message, ephemeral=True)
+                    
             
 
 
