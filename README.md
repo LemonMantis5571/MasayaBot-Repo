@@ -4,11 +4,17 @@ This Discord bot is designed to help users schedule tasks, search the Pokedex, q
 
 # Table of Contents
 Installation
+
 Usage
+
 Features
+
 Contributing
+
 License
+
 Installation
+
 To use the Discord bot, you will need to have Python 3.6 or later installed on your computer. Once you have installed Python, you can install the required packages by running the following command:
 
 ```
