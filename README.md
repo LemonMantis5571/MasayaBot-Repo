@@ -25,7 +25,7 @@ After the required packages have been installed, you will need to create a new D
 Once you have created your bot, you will need to create a .env file in the project directory and add the following information:
 
 ```
-DISCORD_TOKEN=<your_bot_token>
+TOKEN=<your_bot_token>
 Replace <your_bot_token> with your actual bot token.
 ```
 
