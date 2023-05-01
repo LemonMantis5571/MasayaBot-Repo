@@ -37,6 +37,7 @@ python bot.py
 //This will start the bot and allow it to listen for commands in your Discord server.
 ```
 Features
+
 The Discord bot has the following features:
 
 Schedule tasks: Users can schedule tasks using the !schedule command. The bot will send a reminder to the user at the specified time.
@@ -48,7 +49,9 @@ Wikipedia query: Users can search for information on Wikipedia using the !wiki c
 Motivational quotes: Users can get a daily motivational quote using the !quote command. The bot will provide a quote to help motivate and inspire the user.
 
 Contributing
+
 If you would like to contribute to the Discord bot, please open an issue or submit a pull request.
 
 License
+
 This project is licensed under the MIT License. See the LICENSE file for more information.
