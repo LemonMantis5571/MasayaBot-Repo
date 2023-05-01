@@ -26,18 +26,5 @@ async def main():
   await load()
   await bot.start(os.getenv('TOKEN'))
 
-#para recordarme el chino
-# @bot.command(name="reminder", description="reminds you anything")
-# async def remind(ctx, msg:str, day:int, hour:int, minute:int):
-#   now = datetime.datetime.now()
-#   then = now+datetime.timedelta(days=day)
-#   then = now.replace(hour=hour, minute=minute)
-#   delta = (then-now).total_seconds()
-  
-#   await ctx.send(f"{ctx.author.mention}\nI'll remind you: {msg} in {day} days, at {hour} hours and {minute} minutes")
-#   await asyncio.sleep(delta)
-  
-
-#   await ctx.send(f" {ctx.author.mention}\nYou told me to remind: {msg}")
 
 asyncio.run(main())
